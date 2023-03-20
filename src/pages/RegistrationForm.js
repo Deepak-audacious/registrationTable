@@ -1,13 +1,26 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect} from 'react'
 import style from './style.module.css'
 import RegistrationTable from '../pages/RegistrationTable'
+
+
+//get local stroage
+const getLocalItem = () =>{
+    let list = localStorage.getItem('lists')
+    console.log(list)
+    if (list){
+        return JSON.parse(localStorage.getItem('lists'))
+    }
+    else{
+        return []
+    }
+}
 
 
 const RegistrationForm = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [phone, setPhone] = useState('')
-    const [formData, setFormData] = useState([])
+    const [formData, setFormData] = useState(getLocalItem())
 
     const handleSubmit = (e) =>{
         e.preventDefault();
@@ -18,7 +31,16 @@ const RegistrationForm = () => {
             phone:phone
         }
         setFormData([...formData,data])
+        console.log(data)
     }
+
+
+    //set local storage
+    useEffect(() => {
+    localStorage.setItem('lists',JSON.stringify(formData))
+      
+    }, [formData])
+    
     return (
         <>
             <div>

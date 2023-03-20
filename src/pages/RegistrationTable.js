@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 const RegistrationTable = ({ data }) => {
-    const [formData ,setFormData] = useState(data)
     return (
         <div>
             <table style={{border:"1px solid black"}}>
@@ -13,7 +12,7 @@ const RegistrationTable = ({ data }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {formData.map((item, index) => (
+                    {data.map((item, index) => (
                         <tr key={index}>
                             <td>{item.name}</td>
                             <td>{item.email}</td>
